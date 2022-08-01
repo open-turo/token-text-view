@@ -37,7 +37,7 @@ final class TokenTextViewTests: XCTestCase {
     func testInitWithTextAndTokens() {
         XCTAssertNotNil(tokenTextView)
     }
-    
+
     func testInitWithTextNoTokens() {
         tokenTextView = TokenTextView(text: mockTemplateText)
         XCTAssertNotNil(tokenTextView)
@@ -52,7 +52,7 @@ final class TokenTextViewTests: XCTestCase {
         tokenTextView = TokenTextView(tokens: mockTokens)
         XCTAssertNotNil(tokenTextView)
     }
-    
+
     // MARK: Tokenized text
 
     func testTokenizeText() {
@@ -97,7 +97,7 @@ final class TokenTextViewTests: XCTestCase {
 
         XCTAssertEqual(tokenTextViewMirror.tokenInstances?.count, numberOfTokenInstances - 1)
     }
-    
+
     // MARK: Templated text
 
     func testTemplatedTextComputeIsCorrect() {
