@@ -1,0 +1,4 @@
+Hi {{FIRST_NAME}},
+This is a message written for testing. Please contact us at {{EMAIL}} or give us a call at {{PHONE_NUMBER}} between {{START_TIME}} and {{END_TIME}} during the weekdays.
+Thanks
+{{FULL_NAME}}
