@@ -1,0 +1,94 @@
+name: CI
+
+on:
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint:
+    name: Lint
+    # runs-on: [self-hosted, macOS, normal_priority]
+    runs-on: [self-hosted, general-ubuntu]
+
+    steps:
+      - name: Clean Workspace Folder
+        run: |
+          rm -rf "${GITHUB_WORKSPACE:?}/*"
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ssh-key: ${{ secrets.sshkey }}
+          ssh-known-hosts: "github.com"
+      - uses: open-turo/action-pre-commit@v1
+
+  test:
+    name: Test
+    # runs-on: [self-hosted, macOS, normal_priority]
+    runs-on: [self-hosted, general-ubuntu]
+
+    steps:
+      - name: Clean Workspace Folder
+        run: |
+          rm -rf "${GITHUB_WORKSPACE:?}/*"
+      - name: Checkout
+        uses: actions/checkout@v2
+      - if: hashFiles('script/test')
+        run: |
+          ./script/test
+  release-notes:
+    name: Release notes preview
+    runs-on: [self-hosted, general-ubuntu]
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Setup tools
+        uses: open-turo/action-setup-tools/versions@v1
+        with:
+          node: 16.15.1
+      - run: npm install
+      - name: Generate release notes
+        id: release-notes-preview
+        uses: guilhermetod/semantic-release-notes-preview@v1.0.0
+      - name: Check for release notes comment
+        if: success() || failure()
+        uses: peter-evans/find-comment@v1
+        id: fc
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: "github-actions[bot]"
+          body-includes: " <!-- release notes preview comment -->"
+
+      - name: Delete previous release note
+        if: steps.fc.outputs.comment-id != ''
+        uses: jungwinter/comment@v1
+        with:
+          type: delete
+          comment_id: ${{ steps.fc.outputs.comment-id }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Comment release notes preview
+        uses: peter-evans/create-or-update-comment@v1
+        if: steps.release-notes-preview.outputs.releaseNotes
+        with:
+          issue-number: ${{ github.event.number }}
+          body: |
+            ## Release notes preview
+            Below is a preview of the release notes if your PR gets merged.
+            ---
+            <!-- release notes preview comment -->
+            ${{ steps.release-notes-preview.outputs.releaseNotes }}
+      - name: Create no release created
+        uses: peter-evans/create-or-update-comment@v1
+        if: steps.release-notes-preview.outputs.releaseNotes == ''
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            <!-- release notes preview comment -->
+            ## Release notes preview
+            **_No_ new release will be created.**
+            If you are expecting a release, you will need to either fix a bug or add a feature.
+            Chores, CI, docs, refactoring, style and other changes will not trigger a release.

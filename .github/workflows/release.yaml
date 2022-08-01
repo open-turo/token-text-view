@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Lint
+    # runs-on: [self-hosted, macOS, normal_priority]
+    runs-on: [self-hosted, general-ubuntu]
+    steps:
+      - name: Clean Workspace Folder
+        run: |
+          rm -rf "${GITHUB_WORKSPACE:?}/*"
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ssh-key: ${{ secrets.sshkey }}
+          ssh-known-hosts: "github.com"
+      - uses: open-turo/action-pre-commit@v1
+
+  release:
+    name: Release
+    runs-on: [self-hosted, general-ubuntu]
+    needs: [lint]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: go-semantic-release/action@v1
+        with:
+          github-token: ${{ secrets.ROLLSBOT_GITHUB_ACTIONS_TOKEN }}
