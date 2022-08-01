@@ -4,11 +4,11 @@ TokenTextView is a lightweight UITextView class for editing & managing tokenized
 ## Features
 ### Insert a token into the text
 
-![insert token](Media/insert-token.gif)
+<img src = "Media/insert-token.gif" width="50%"/>
 
 ### Create templated or tokenized text
 
-![tokenized text cell](Media/tokenized-text-cell.png)
+<img src = "Media/tokenized-text-cell.png" width="50%"/>
 
 to:
 
@@ -18,8 +18,7 @@ and vice-versa.
 
 ### Cut/copy & paste tokens
 
-![cut paste](Media/cut-paste.gif)
-
+<img src = "Media/cut-paste.gif" width="50%"/>
 ## Requirements
 - iOS 11.0+
 - Xcode 14.0+
@@ -78,7 +77,7 @@ tokenTextView.tokens = tokenArray
 
 TokenTextView can turn tokenized text into text templates and vice-versa. In order to do so, it uses identifiers to designate tokens. It's set up to use "mustache" syntax as the default:
 
->{{{TOKEN_IDENTIFIER}}}
+>{{TOKEN_IDENTIFIER}}
 
 You can use custom identifiers by passing in ``tokenOpen`` and ``tokenClose`` parameters during initialization:
 
@@ -118,19 +117,21 @@ TokenTextView has a computed property called `templatedText` that converts token
 ```
 print(tokenTextView.templatedText)
 ```
-will print:
+will produce:
 
 >This is an example templated message. Some variables can be {{START_TIME}} and {{END_TIME}} or {{NAME}} and {{BIRTHDATE}}
 
 
 ### Create tokenized text
+TokenTextView can tokenize existing templated text. Setting `tokens` will initiate tokenization.`tokenOpen` and `tokenClose` must correspond to the identifiers in the templated text.
+
 ```
 tokenTextView.text = "Hey {{GUEST_NAME}}!\nThanks for booking our {{VEHICLE_NAME}}. Feel free to contact us at {{HOST_PHONE_NUMBER}} if you have any questions.\nBest\n{{HOST_FIRST_NAME}}"
+tokenTextView.tokens = tokenArray
 ```
-to
+will produce:
 
-![tokenized text](Media/tokenized-text.png)
-
+<img src = "Media/tokenized-text.png" width="75%"/>
 
 ## Contributions
 
