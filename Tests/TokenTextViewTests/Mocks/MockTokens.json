@@ -1,0 +1,42 @@
+[
+    {
+        "name": "First name",
+        "identifier": "FIRST_NAME"
+    },
+    {
+        "name": "Last name",
+        "identifier": "LAST_NAME"
+    },
+    {
+        "name": "Full name",
+        "identifier": "FULL_NAME"
+    },
+    {
+        "name": "Email",
+        "identifier": "EMAIL"
+    },
+    {
+        "name": "Scheduled date",
+        "identifier": "SCHEDULED_DATE"
+    },
+    {
+        "name": "Birthday",
+        "identifier": "BIRTHDAY"
+    },
+    {
+        "name": "Address",
+        "identifier": "ADDRESS"
+    },
+    {
+        "name": "Start time",
+        "identifier": "START_TIME"
+    },
+    {
+        "name": "End time",
+        "identifier": "END_TIME"
+    },
+    {
+        "name": "Phone number",
+        "identifier": "PHONE_NUMBER"
+    }
+]
