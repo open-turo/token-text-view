@@ -4,11 +4,11 @@ TokenTextView is a lightweight UITextView class for editing & managing tokenized
 ## Features
 ### Insert a token into the text
 
-<img src = "Media/insert-token.gif" width="50%"/>
+<img src = "Media/insert-token.gif" width="45%"/>
 
 ### Create templated or tokenized text
 
-<img src = "Media/tokenized-text-cell.png" width="50%"/>
+<img src = "Media/tokenized-text-cell.png" width="45%"/>
 
 to:
 
@@ -131,7 +131,7 @@ tokenTextView.tokens = tokenArray
 ```
 will produce:
 
-<img src = "Media/tokenized-text.png" width="75%"/>
+<img src = "Media/tokenized-text.png" width="50%"/>
 
 ## Contributions
 
