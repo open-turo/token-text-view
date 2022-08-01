@@ -79,7 +79,7 @@ final class TokenTextViewTests: XCTestCase {
 
         let numberOfTokenInstances = tokenTextViewMirror.tokenInstances?.count ?? 0
 
-        tokenTextView.addToken(token)
+        tokenTextView.insertToken(token)
 
         XCTAssertEqual(tokenTextViewMirror.tokenInstances?.count ?? 0, numberOfTokenInstances + 1)
     }
