@@ -14,9 +14,9 @@ final class TokenTextView: UITextView {
                 NSAttributedString.Key.foregroundColor: tokenForegroundColor,
                 NSAttributedString.Key.font: tokenFont]
     }
-    
+
     // MARK: Public properties
-    
+
     var tokens = [Token]() {
         didSet {
             tokenizeText()
@@ -69,9 +69,9 @@ final class TokenTextView: UITextView {
         // In order to allow the use of standard UITextViewDelegate methods, we are using notifications to add class specific behavior that's required when text changes
         NotificationCenter.default.addObserver(self, selector: #selector(textChanged), name: UITextView.textDidChangeNotification, object: nil)
     }
-    
+
     // MARK: Public methods
-    
+
     func insertToken(_ token: Token, at insertRange: NSRange? = nil) {
         let location = insertRange != nil ? (insertRange?.location)! : selectedRange.location
         let tokenRange = NSRange(location: location, length: token.name.count)
@@ -98,7 +98,7 @@ final class TokenTextView: UITextView {
     }
 
     // MARK: Private methods
-    
+
     // Create stylized text from a template
     private func tokenizeText() {
         guard !text.isEmpty else { return }
@@ -131,7 +131,7 @@ final class TokenTextView: UITextView {
         for (index, instance) in sortedInstances.enumerated() {
             // Get the String.Index values for the instance range to use in replacingCharacters
             let rangeIndices = stringIndices(ofTokenInstance: instance, messageText: mutableText)
-            
+
             // Replace the code representation with the name representation
             mutableText = mutableText.replacingCharacters(in: rangeIndices.0...rangeIndices.1, with: instance.token.name)
 
@@ -140,7 +140,7 @@ final class TokenTextView: UITextView {
 
             // Get the difference between the length of the new value and the old value
             let diff = tokenString(from: instance.token.identifier).count - instance.token.name.count
-            
+
             // Because the text has been modified with the name representation replacing the code representation, we need to update subsequent token ranges to reflect that
             // We only need to update the ranges of all tokens AFTER the first
             guard index + 1 < sortedInstances.count else { break }
@@ -148,7 +148,7 @@ final class TokenTextView: UITextView {
                 sortedInstances[i].range.location -= diff
             }
         }
-        
+
         return mutableText
     }
 
@@ -156,17 +156,17 @@ final class TokenTextView: UITextView {
         var mutableText = plainText
         var sortedInstances = instances
         sortedInstances.sort { $0.range.location < $1.range.location }
-        
+
         for (index, instance) in sortedInstances.enumerated() {
             // Get the String.Index values for the instance range to use in replacingCharacters
             let rangeIndices = stringIndices(ofTokenInstance: instance, messageText: mutableText)
 
             // Replace the code representation with the name representation
             mutableText = mutableText.replacingCharacters(in: rangeIndices.0...rangeIndices.1, with: tokenString(from: instance.token.identifier))
-            
+
             // Get the difference between the length of the new value and the old value
             let diff = instance.token.name.count - tokenString(from: instance.token.identifier).count
-            
+
             // Because the text has been modified with the name representation replacing the code representation, we need to update subsequent token ranges to reflect that
             // We only need to update the ranges of all tokens AFTER the first
             guard index + 1 < sortedInstances.count else { break }
@@ -174,7 +174,7 @@ final class TokenTextView: UITextView {
                 sortedInstances[i].range.location -= diff
             }
         }
-        
+
         return mutableText
     }
 
