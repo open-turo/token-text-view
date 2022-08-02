@@ -34,10 +34,6 @@ repos:
     hooks:
       - id: go-fmt
       - id: golangci-lint-mod
-  - repo: https://github.com/rhysd/actionlint
-    rev: v1.6.9
-    hooks:
-      - id: actionlint
   - repo: https://github.com/jumanjihouse/pre-commit-hooks
     rev: 2.1.6 # or specific git tag
     hooks:
