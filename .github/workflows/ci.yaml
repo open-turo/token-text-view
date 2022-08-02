@@ -11,7 +11,7 @@ jobs:
   lint:
     name: Lint
     # runs-on: [self-hosted, macOS, normal_priority]
-    runs-on: [self-hosted, general-ubuntu]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Clean Workspace Folder
@@ -28,7 +28,7 @@ jobs:
   test:
     name: Test
     # runs-on: [self-hosted, macOS, normal_priority]
-    runs-on: [self-hosted, general-ubuntu]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Clean Workspace Folder
@@ -41,7 +41,7 @@ jobs:
           ./script/test
   release-notes:
     name: Release notes preview
-    runs-on: [self-hosted, general-ubuntu]
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         with:
