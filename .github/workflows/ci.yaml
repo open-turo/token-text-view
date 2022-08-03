@@ -24,7 +24,7 @@ jobs:
 
   test:
     name: Test
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     # runs-on: macos-latest  # macos-latest causes a build problem due to missing UIKit
     # needs: [lint]  # Uncomment if tests are slow
     steps:
