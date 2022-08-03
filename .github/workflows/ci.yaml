@@ -25,18 +25,10 @@ jobs:
   test:
     name: Test
     runs-on: macos-latest
-    # runs-on: macos-latest  # macos-latest causes a build problem due to missing UIKit
     # needs: [lint]  # Uncomment if tests are slow
     steps:
-      # Pin a specific Swift version (it's slow)
-      # Ubuntu-latest defaults to 5.6.0 as of this writing.
-      # - uses: swift-actions/setup-swift@v1
-      #   with:
-      #     swift-version: "5.6.0"
       - uses: actions/checkout@v3
       - name: Build package
-        run: |
-          swift build -Xswiftc "-sdk" -Xswiftc "$(xcrun --sdk iphonesimulator --show-sdk-path)" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios14.0-simulator"
+        run: swift build -Xswiftc "-sdk" -Xswiftc "$(xcrun --sdk iphonesimulator --show-sdk-path)" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios15.5-simulator"
       - name: Run tests
-        run: |
-          swift test --enable-code-coverage -v
+        run: xcodebuild test -scheme TokenTextView -sdk "$(xcrun --sdk iphonesimulator --show-sdk-path)" -target x86_64-apple-ios15.5-simulator -destination "OS=15.5,name=iPhone 13 Pro"
