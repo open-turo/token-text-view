@@ -12,7 +12,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "TokenTextView",
-            targets: ["TokenTextView"]),
+            targets: ["TokenTextView"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -32,6 +32,6 @@ let package = Package(
                 .copy("Mocks/MockTokenInstances.json"),
                 .copy("Mocks/MockTemplateText.txt"),
                 .copy("Mocks/MockPlainText.txt")
-            ]),
+            ])
     ]
 )
