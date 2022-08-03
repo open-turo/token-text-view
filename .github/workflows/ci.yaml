@@ -4,19 +4,39 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: ci-token-text-view-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   lint:
     name: Lint
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
-      - uses: open-turo/actions-gha/lint@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      # Uncomment this to pin a specific Swift version (it's slow)
+      # - uses: swift-actions/setup-swift@v1
+      #   with:
+      #     swift-version: "5"
+      - uses: actions/checkout@v3
+      - name: Run swiftlint
+        run: swiftlint
+      - uses: open-turo/action-pre-commit@v1
 
   test:
     name: Test
     runs-on: ubuntu-latest
+    # runs-on: macos-latest  # macos-latest causes a build problem due to missing UIKit
+    # needs: [lint]  # Uncomment if tests are slow
     steps:
-      - uses: open-turo/actions-gha/test@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      # Pin a specific Swift version (it's slow)
+      # Ubuntu-latest defaults to 5.6.0 as of this writing.
+      # - uses: swift-actions/setup-swift@v1
+      #   with:
+      #     swift-version: "5.6.0"
+      - uses: actions/checkout@v3
+      - name: Build package
+        run: |
+          swift build -v
+      - name: Run tests
+        run: |
+          swift test --enable-code-coverage -v
