@@ -9,15 +9,6 @@ repos:
           - --autofix
       - id: end-of-file-fixer
       - id: trailing-whitespace
-  - repo: https://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.50.0
-    hooks:
-      - id: terraform_fmt
-        stages: [commit]
-      - id: terraform_validate
-        stages: [commit]
-      - id: terraform_docs
-        stages: [commit]
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v2.5.1
     hooks:
@@ -28,14 +19,8 @@ repos:
     hooks:
       - id: commitlint
         stages: [commit-msg]
-        additional_dependencies: ["@commitlint/config-conventional"]
-  - repo: https://github.com/turo/pre-commit-hooks
-    rev: v2.5.0
+        additional_dependencies: ["@open-turo/commitlint-config-conventional"]
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.6.8
     hooks:
-      - id: go-fmt
-      - id: golangci-lint-mod
-  - repo: https://github.com/jumanjihouse/pre-commit-hooks
-    rev: 2.1.6 # or specific git tag
-    hooks:
-      - id: shellcheck
-      - id: shfmt
+      - id: actionlint
