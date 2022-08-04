@@ -1,0 +1,4 @@
+Hi First name,
+This is a message written for testing. Please contact us at Email or give us a call at Phone number between Start time and End time during the weekdays.
+Thanks
+Full name

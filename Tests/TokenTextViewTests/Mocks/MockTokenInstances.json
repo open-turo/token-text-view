@@ -1,0 +1,62 @@
+[
+  {
+    "range": {
+      "length": 10,
+      "location": 3
+    },
+    "token": {
+      "identifier": "FIRST_NAME",
+      "name": "First name"
+    }
+  },
+  {
+    "range": {
+      "length": 5,
+      "location": 75
+    },
+    "token": {
+      "identifier": "EMAIL",
+      "name": "Email"
+    }
+  },
+  {
+    "range": {
+      "length": 12,
+      "location": 102
+    },
+    "token": {
+      "identifier": "PHONE_NUMBER",
+      "name": "Phone number"
+    }
+  },
+  {
+    "range": {
+      "length": 10,
+      "location": 123
+    },
+    "token": {
+      "identifier": "START_TIME",
+      "name": "Start time"
+    }
+  },
+  {
+    "range": {
+      "length": 8,
+      "location": 138
+    },
+    "token": {
+      "identifier": "END_TIME",
+      "name": "End time"
+    }
+  },
+  {
+    "range": {
+      "length": 9,
+      "location": 175
+    },
+    "token": {
+      "identifier": "FULL_NAME",
+      "name": "Full name"
+    }
+  }
+]
