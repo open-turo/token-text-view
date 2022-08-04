@@ -1,0 +1,35 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: open-turo/actions-gha/lint@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: open-turo/actions-gha/test@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+  release:
+    needs:
+      - lint
+      - test
+    name: Release
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: open-turo/actions-gha/release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
