@@ -4,19 +4,32 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: ci-token-text-view-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
     steps:
-      - uses: open-turo/actions-gha/lint@v1
+      - uses: actions/checkout@v3
+      - name: Install swiftlint
+        uses: Cyberbeni/install-swift-tool@v2
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          url: https://github.com/realm/SwiftLint
+          version: "*"
+      - name: Run swiftlint
+        run: swiftlint
+      - uses: open-turo/action-pre-commit@v1
 
   test:
     name: Test
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
+    # needs: [lint]  # Uncomment if tests are slow
     steps:
-      - uses: open-turo/actions-gha/test@v1
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v3
+      - name: Build package
+        run: swift build -Xswiftc "-sdk" -Xswiftc "$(xcrun --sdk iphonesimulator --show-sdk-path)" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios15.5-simulator"
+      - name: Run tests
+        run: xcodebuild test -scheme TokenTextView -sdk "$(xcrun --sdk iphonesimulator --show-sdk-path)" -target x86_64-apple-ios15.2-simulator -destination "OS=15.2,name=iPhone 13 Pro"
