@@ -144,8 +144,8 @@ final class TokenTextView: UITextView {
             // Because the text has been modified with the name representation replacing the code representation, we need to update subsequent token ranges to reflect that
             // We only need to update the ranges of all tokens AFTER the first
             guard index + 1 < sortedInstances.count else { break }
-            for i in index + 1...sortedInstances.count - 1 {
-                sortedInstances[i].range.location -= diff
+            for place in index + 1...sortedInstances.count - 1 {
+                sortedInstances[place].range.location -= diff
             }
         }
 
@@ -170,8 +170,8 @@ final class TokenTextView: UITextView {
             // Because the text has been modified with the name representation replacing the code representation, we need to update subsequent token ranges to reflect that
             // We only need to update the ranges of all tokens AFTER the first
             guard index + 1 < sortedInstances.count else { break }
-            for i in index + 1...sortedInstances.count - 1 {
-                sortedInstances[i].range.location -= diff
+            for place in index + 1...sortedInstances.count - 1 {
+                sortedInstances[place].range.location -= diff
             }
         }
 
@@ -195,7 +195,15 @@ final class TokenTextView: UITextView {
     }
 
     private func cleanTokenInstances(inRange changedRange: NSRange, difference: Int) {
-        tokenInstances = difference < 0 ? tokenInstances.filter { $0.range.upperBound <= changedRange.location || $0.range.location >= changedRange.upperBound } : tokenInstances.filter({ $0.range.upperBound <= changedRange.location || $0.range.location >= changedRange.location })
+        let subtractFilterCondition: (TokenInstance) -> Bool = {
+            $0.range.upperBound <= changedRange.location || $0.range.location >= changedRange.upperBound
+        }
+
+        let addFilterCondition: (TokenInstance) -> Bool = {
+            $0.range.upperBound <= changedRange.location || $0.range.location >= changedRange.location
+        }
+
+        tokenInstances = difference < 0 ? tokenInstances.filter(subtractFilterCondition) : tokenInstances.filter(addFilterCondition)
     }
 
     private func updateRanges(after location: Int, difference: Int) {
@@ -279,7 +287,15 @@ final class TokenTextView: UITextView {
 
     private func copyTokens() {
         pasteboardTokenInstances.removeAll()
-        let copiedTokenInstances = tokenInstances.filter { selectedRange.lowerBound <= $0.range.lowerBound && $0.range.upperBound <= selectedRange.upperBound }.map { $0.copy() as! TokenInstance }
+
+        let filterCondition: (TokenInstance) -> Bool = { [weak self] in
+            guard let self = self else { return false }
+            return self.selectedRange.lowerBound <= $0.range.lowerBound && $0.range.upperBound <= self.selectedRange.upperBound
+        }
+        guard let copiedTokenInstances = tokenInstances.filter(filterCondition).map({ $0.copy() as? TokenInstance }) as? [TokenInstance] else {
+            print("Could not get filtered token instances as [TokenInstance]")
+            return
+        }
         pasteboardTokenInstances = copiedTokenInstances.map {
             ($0, $0.range.location - selectedRange.location)
         }
