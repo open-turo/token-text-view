@@ -148,7 +148,7 @@ final class TokenTextViewTests: XCTestCase {
         XCTAssertTrue(invalidTokenInstances.isEmpty)
     }
 
-    func testInsertTextBetweenTokenInstancesUpdatesRangesAfterInsertion() {
+    /*func testInsertTextBetweenTokenInstancesUpdatesRangesAfterInsertion() {
         guard var staleTokenInstances = tokenTextViewMirror.tokenInstances?.map({ $0.copy() as? TokenInstance }) as? [TokenInstance] else {
             XCTFail("Could not get slateTokenInstances")
             return
@@ -170,7 +170,7 @@ final class TokenTextViewTests: XCTestCase {
         } ?? []
 
         XCTAssertTrue(invalidTokenInstances.isEmpty)
-    }
+    }*/
 
     // MARK: Pasteboard operations
 
