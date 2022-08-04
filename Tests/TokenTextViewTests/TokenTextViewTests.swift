@@ -107,14 +107,17 @@ final class TokenTextViewTests: XCTestCase {
     // MARK: Keyboard updates
 
     func testInsertTextBeforeAllTokenInstancesUpdatesAllTokenInstanceRanges() {
-        let staleTokenInstances = tokenTextViewMirror.tokenInstances?.map { $0.copy() as! TokenInstance }
+        guard let staleTokenInstances = tokenTextViewMirror.tokenInstances?.map({ $0.copy() as? TokenInstance }) as? [TokenInstance] else {
+            XCTFail("Could not get staleTokenInstances")
+            return
+        }
         let newText = "T"
 
         tokenTextView.selectedRange = NSRange(location: 0, length: 0)
         tokenTextView.insertText(newText)
 
         let invalidTokenInstances = tokenTextViewMirror.tokenInstances?.filter { instance in
-            guard let staleTokenInstanceLocation = staleTokenInstances?.first(where: { $0.token.identifier == instance.token.identifier })?.range.location else {
+            guard let staleTokenInstanceLocation = staleTokenInstances.first(where: { $0.token.identifier == instance.token.identifier })?.range.location else {
                 XCTFail("Could not get staleTokenInstanceLocation")
                 return false
             }
@@ -125,14 +128,17 @@ final class TokenTextViewTests: XCTestCase {
     }
 
     func testInsertTextAfterAllTokenInstancesDoesNotUpdateTokenInstanceRanges() {
-        let staleTokenInstances = tokenTextViewMirror.tokenInstances?.map { $0.copy() as! TokenInstance }
+        guard let staleTokenInstances = tokenTextViewMirror.tokenInstances?.map({ $0.copy() as? TokenInstance }) as? [TokenInstance] else {
+            XCTFail("Could not get slateTokenInstances")
+            return
+        }
         let newText = "T"
 
         tokenTextView.selectedRange = NSRange(location: tokenTextView.text.count, length: 0)
         tokenTextView.insertText(newText)
 
         let invalidTokenInstances = tokenTextViewMirror.tokenInstances?.filter { instance in
-            guard let staleTokenInstanceLocation = staleTokenInstances?.first(where: { $0.token.identifier == instance.token.identifier })?.range.location else {
+            guard let staleTokenInstanceLocation = staleTokenInstances.first(where: { $0.token.identifier == instance.token.identifier })?.range.location else {
                 XCTFail("Could not get staleTokenInstanceLocation")
                 return false
             }
@@ -143,16 +149,19 @@ final class TokenTextViewTests: XCTestCase {
     }
 
     func testInsertTextBetweenTokenInstancesUpdatesRangesAfterInsertion() {
-        var staleTokenInstances = tokenTextViewMirror.tokenInstances?.map { $0.copy() as! TokenInstance }
-        staleTokenInstances?.sort { $0.range.location < $1.range.location }
+        guard var staleTokenInstances = tokenTextViewMirror.tokenInstances?.map({ $0.copy() as? TokenInstance }) as? [TokenInstance] else {
+            XCTFail("Could not get slateTokenInstances")
+            return
+        }
+        staleTokenInstances.sort { $0.range.location < $1.range.location }
         let newText = "T"
 
-        let insertLocation = (staleTokenInstances?[(staleTokenInstances?.count ?? 6)/2].range.location ?? 118) - 1
+        let insertLocation = (staleTokenInstances[staleTokenInstances.count].range.location) - 1
         tokenTextView.selectedRange = NSRange(location: insertLocation, length: 0)
         tokenTextView.insertText(newText)
 
         let invalidTokenInstances = tokenTextViewMirror.tokenInstances?.filter { instance in
-            guard let staleTokenInstanceLocation = staleTokenInstances?.first(where: { $0.token.identifier == instance.token.identifier })?.range.location else {
+            guard let staleTokenInstanceLocation = staleTokenInstances.first(where: { $0.token.identifier == instance.token.identifier })?.range.location else {
                 XCTFail("Could not get staleTokenInstanceLocation")
                 return false
             }
@@ -201,7 +210,10 @@ final class TokenTextViewTests: XCTestCase {
     }
 
     func testPastePasteboardOperationUpdatesRangesAfterPaste() {
-        let staleTokenInstances = tokenTextViewMirror.tokenInstances?.map { $0.copy() as! TokenInstance }
+        guard let staleTokenInstances = tokenTextViewMirror.tokenInstances?.map({ $0.copy() as? TokenInstance }) as? [TokenInstance] else {
+            XCTFail("Could not get slateTokenInstances")
+            return
+        }
 
         let copyRange = NSRange(location: 20, length: 80)
         tokenTextView.selectedRange = copyRange
@@ -212,7 +224,7 @@ final class TokenTextViewTests: XCTestCase {
         tokenTextView.paste(tokenTextView)
 
         let invalidTokenInstances = tokenTextViewMirror.tokenInstances?.filter { instance in
-            guard let staleTokenInstanceLocation = staleTokenInstances?.first(where: { $0.token.identifier == instance.token.identifier })?.range.location else {
+            guard let staleTokenInstanceLocation = staleTokenInstances.first(where: { $0.token.identifier == instance.token.identifier })?.range.location else {
                 XCTFail("Could not get staleTokenInstanceLocation")
                 return false
             }
@@ -243,10 +255,22 @@ extension TokenTextViewTests {
         if let path = Bundle.module.path(forResource: "MockTokenInstances", ofType: "json") {
             do {
                 let jsonData = try Data(contentsOf: URL(fileURLWithPath: path))
-                let jsonResult = try JSONSerialization.jsonObject(with: jsonData) as? [Dictionary<String, Dictionary<String,AnyObject>>]
+                let jsonResult = try JSONSerialization.jsonObject(with: jsonData) as? [[String: [String: AnyObject]]]
                 var mockTokenInstances = [TokenInstance]()
                 for object in jsonResult! {
-                    mockTokenInstances.append(TokenInstance(token: Token(name: object["token"]?["name"] as! String, identifier: object["token"]?["identifier"] as! String), range: NSRange(location: object["range"]?["location"] as! Int, length: object["range"]?["length"] as! Int)))
+                    guard let name = object["token"]?["name"] as? String else {
+                        continue
+                    }
+                    guard let identifier = object["token"]?["identifier"] as? String else {
+                        continue
+                    }
+                    guard let location = object["range"]?["location"] as? Int else {
+                        continue
+                    }
+                    guard let length = object["range"]?["length"] as? Int else {
+                        continue
+                    }
+                    mockTokenInstances.append(TokenInstance(token: Token(name: name, identifier: identifier), range: NSRange(location: location, length: length)))
                 }
                 self.mockTokenInstances = mockTokenInstances
             } catch {
