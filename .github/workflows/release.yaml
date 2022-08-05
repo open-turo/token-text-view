@@ -33,7 +33,6 @@ jobs:
 
   release:
     needs:
-      - lint
       - test
     name: Release
     runs-on: ubuntu-latest
