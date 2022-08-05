@@ -39,7 +39,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install CocoaPods
-        run: gem install cocoapods
+        run: sudo gem install cocoapods
       - name: Release and deploy to CocoaPods
         uses: cycjimmy/semantic-release-action@v2
         env:
