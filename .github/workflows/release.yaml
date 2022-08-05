@@ -36,17 +36,15 @@ jobs:
       - lint
       - test
     name: Release
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     steps:
       - name: Release
         uses: cycjimmy/semantic-release-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install CocoaPods
+        run: gem install cocoapods
       - name: Deploy to CocoaPods # needs new tag from Release step
-        run: |
-          set -eo pipefail
-          export TAG_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
-          pod lib lint --allow-warnings
-          pod trunk push --allow-warnings
+        uses: levibostian/semantic-release-cocoapods@v1
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
