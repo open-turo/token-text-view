@@ -39,7 +39,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Release
-        uses: open-turo/actions-gha/release@v1
+        uses: cycjimmy/semantic-release-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy to CocoaPods # needs new tag from Release step
