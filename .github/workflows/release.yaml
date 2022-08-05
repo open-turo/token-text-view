@@ -41,7 +41,9 @@ jobs:
       - name: Install CocoaPods
         run: sudo gem install cocoapods
       - name: Install semantic versioning for CocoaPods
-        run: npm install semantic-release-cocoapods -D
+        run: |
+          npm audit fix
+          npm install semantic-release-cocoapods -D
       - name: Release
         uses: cycjimmy/semantic-release-action@v2
         env:
