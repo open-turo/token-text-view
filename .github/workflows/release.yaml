@@ -38,9 +38,15 @@ jobs:
     name: Release
     runs-on: macos-latest
     steps:
-      - name: Dummy build
-        run: echo "Release build has not been configured"
       - name: Release
         uses: cycjimmy/semantic-release-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy to CocoaPods # needs new tag from Release step
+        run: |
+          set -eo pipefail
+          export TAG_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
+          pod lib lint --allow-warnings
+          pod trunk push --allow-warnings
+        env:
+          COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
