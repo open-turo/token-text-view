@@ -45,6 +45,6 @@ jobs:
       - name: Install CocoaPods
         run: gem install cocoapods
       - name: Deploy to CocoaPods # needs new tag from Release step
-        uses: levibostian/semantic-release-cocoapods@v1
+        uses: levibostian/semantic-release-cocoapods
         env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
