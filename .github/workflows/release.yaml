@@ -38,13 +38,10 @@ jobs:
     name: Release
     runs-on: ubuntu-latest
     steps:
-      - name: Release
+      - name: Install CocoaPods
+        run: gem install cocoapods
+      - name: Release and deploy to CocoaPods
         uses: cycjimmy/semantic-release-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Install CocoaPods
-        run: gem install cocoapods
-      - name: Deploy to CocoaPods # needs new tag from Release step
-        uses: levibostian/semantic-release-cocoapods@v1
-        env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
