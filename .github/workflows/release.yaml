@@ -40,7 +40,9 @@ jobs:
     steps:
       - name: Install CocoaPods
         run: sudo gem install cocoapods
-      - name: Release and deploy to CocoaPods
+      - name: Install semantic versioning for CocoaPods
+        run: npm install semantic-release-cocoapods -D
+      - name: Release
         uses: cycjimmy/semantic-release-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
