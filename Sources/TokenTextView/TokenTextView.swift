@@ -2,6 +2,8 @@ import UIKit
 
 final class TokenTextView: UITextView {
 
+    // MARK: Public properties
+
     var tokenBackgroundColor = UIColor.purple
     var tokenForegroundColor = UIColor.white
     var tokenFont = UIFont.systemFont(ofSize: 12.0)
@@ -15,8 +17,6 @@ final class TokenTextView: UITextView {
                 NSAttributedString.Key.font: tokenFont]
     }
 
-    // MARK: Public properties
-
     var tokens = [Token]() {
         didSet {
             tokenizeText()
@@ -26,6 +26,7 @@ final class TokenTextView: UITextView {
     var templatedText: String {
         // Ensure all tokens ranges have been updated
         guard tokenInstances.first(where: {$0.range.upperBound - 1 >= text.count}) == nil else {
+            print("TokenTextView: Failed to create templated text.")
             return ""
         }
 
@@ -141,7 +142,7 @@ final class TokenTextView: UITextView {
             let diff = tokenString(from: instance.token.identifier).count - instance.token.name.count
 
             // Because the text has been modified with the name representation replacing the code representation, we need to update subsequent token ranges to reflect that
-            // We only need to update the ranges of all tokens AFTER the first
+            // We only need to update the ranges of all tokens after the first
             guard index + 1 < sortedInstances.count else { break }
             for place in index + 1...sortedInstances.count - 1 {
                 sortedInstances[place].range.location -= diff
@@ -167,7 +168,7 @@ final class TokenTextView: UITextView {
             let diff = instance.token.name.count - tokenString(from: instance.token.identifier).count
 
             // Because the text has been modified with the name representation replacing the code representation, we need to update subsequent token ranges to reflect that
-            // We only need to update the ranges of all tokens AFTER the first
+            // We only need to update the ranges of all tokens after the first
             guard index + 1 < sortedInstances.count else { break }
             for place in index + 1...sortedInstances.count - 1 {
                 sortedInstances[place].range.location -= diff
