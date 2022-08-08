@@ -2,6 +2,8 @@
 
 TokenTextView is a lightweight UITextView class for editing & managing tokenized text.
 
+Generates and renders templates using token syntax ([mustache](https://mustache.github.io/mustache.5.html) by default)
+
 ## Features
 
 ### Insert a token into the text
@@ -61,7 +63,7 @@ or
 @IBOutlet var tokenTextView: TokenTextView!
 ```
 
-TokenTextView has of the following initializer:
+TokenTextView has the following initializer:
 
 ```
 init(messageText: String, tokens: [Token], tokenOpen: String, tokenClose: String)
@@ -112,7 +114,7 @@ let range = NSRange(location: 0, length: 0)
 tokenTextView.insert(token, at: range)
 ```
 
-Or you can leave the location blank, and the current location will be used:
+Or you can leave `insertRange blank, and the current cursor location will be used:
 
 ```
 let token = Token(name: "Token name", identifier: "TOKEN_IDENTIFIER")
@@ -122,7 +124,7 @@ tokenTextView.insert(token)
 
 ### Create templated text
 
-TokenTextView has a computed property called `templatedText` that converts tokenized text into text templates with tokens in identifiers:
+TokenTextView has a computed property called `templatedText` that converts rendered text into text templates with tokens in identifiers:
 
 ```
 print(tokenTextView.templatedText)
@@ -134,7 +136,7 @@ will produce:
 
 ### Create tokenized text
 
-TokenTextView can tokenize existing templated text. Setting `tokens` will initiate tokenization.`tokenOpen` and `tokenClose` must correspond to the identifiers in the templated text.
+TokenTextView can render existing templated text. Setting `tokens` will initiate rendering.`tokenOpen` and `tokenClose` must correspond to the identifiers in the templated text.
 
 ```
 tokenTextView.text = "Hey {{GUEST_NAME}}!\nThanks for booking our {{VEHICLE_NAME}}. Feel free to contact us at {{HOST_PHONE_NUMBER}} if you have any questions.\nBest\n{{HOST_FIRST_NAME}}"
