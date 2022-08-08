@@ -11,7 +11,6 @@ extension String {
             let index = distance(from: self.startIndex, to: range.lowerBound)
             ranges.append(NSRange(location: index, length: substring.count))
             searchStartIndex = range.upperBound
-
         }
 
         return ranges
