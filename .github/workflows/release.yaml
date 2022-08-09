@@ -42,7 +42,9 @@ jobs:
         with:
           fetch-depth: 0
       - name: Install CocoaPods
-        run: sudo gem install cocoapods
+        run: |
+          sudo gem install cocoapods
+          sudo gem install pods
       - name: Install semantic versioning for CocoaPods
         run: |
           npm install semantic-release-cocoapods -D
