@@ -36,7 +36,7 @@ jobs:
       - lint
       - test
     name: Release
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
         with:
@@ -44,7 +44,6 @@ jobs:
       - name: Install CocoaPods
         run: |
           sudo gem install cocoapods
-          sudo gem install pods
       - name: Install semantic versioning for CocoaPods
         run: |
           npm install semantic-release-cocoapods -D
