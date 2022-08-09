@@ -48,4 +48,11 @@ jobs:
         uses: cycjimmy/semantic-release-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Deploy CocoaPod
+        run: |
+          set -eo pipefail
+          export TAG_VERSION=$(git describe --tags $(git rev-list --tags --max-count=1))
+          pod lib lint --allow-warnings
+          pod trunk push --allow-warnings
+        env:
           COCOAPODS_TRUNK_TOKEN: ${{ secrets.COCOAPODS_TRUNK_TOKEN }}
