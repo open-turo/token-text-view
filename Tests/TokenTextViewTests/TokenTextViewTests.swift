@@ -28,7 +28,7 @@ final class TokenTextViewTests: XCTestCase {
 
     override func setUp() {
         loadMockData()
-        tokenTextView = TokenTextView(text: mockTemplateText, tokens: mockTokens)
+        tokenTextView = TokenTextView(text: mockTemplateText, tokenList: mockTokens)
         tokenTextViewMirror = TokenTextViewMirror(tokenTextView)
     }
 
@@ -49,7 +49,7 @@ final class TokenTextViewTests: XCTestCase {
     }
 
     func testInitWithTokensAndNoText() {
-        tokenTextView = TokenTextView(tokens: mockTokens)
+        tokenTextView = TokenTextView(tokenList: mockTokens)
         XCTAssertNotNil(tokenTextView)
     }
 
