@@ -136,16 +136,24 @@ will produce:
 
 ### Create tokenized text
 
-TokenTextView can render existing templated text. Setting `tokens` will initiate rendering.`tokenOpen` and `tokenClose` must correspond to the identifiers in the templated text.
+TokenTextView can render existing templated text. Setting `tokenList` (a list of all potential tokens) will initiate rendering.`tokenOpen` and `tokenClose` must correspond to the identifiers in the templated text.
 
 ```
 tokenTextView.text = "Hey {{GUEST_NAME}}!\nThanks for booking our {{VEHICLE_NAME}}. Feel free to contact us at {{HOST_PHONE_NUMBER}} if you have any questions.\nBest\n{{HOST_FIRST_NAME}}"
-tokenTextView.tokens = tokenArray
+tokenTextView.tokenList = tokenArray
 ```
 
 will produce:
 
 <img src = "Media/tokenized-text.png" width="50%"/>
+
+## Example
+
+Feel free to check out the example project in `Example/TokenTextView`.
+
+Open `TokenTextViewExample.xcodeproj` and run the project. A view controller containg `TokenTextView` and a list of example tokens will appear. Simply tap the token to insert a token into the text:
+
+<img src = "Media/example.gif" width="50%"/>
 
 ## Contributions
 
