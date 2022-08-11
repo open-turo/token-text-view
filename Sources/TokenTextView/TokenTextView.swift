@@ -1,23 +1,25 @@
 import UIKit
 
+struct Attributes {
+    var backgroundColor: UIColor
+    var foregroundColor: UIColor
+    var font: UIFont
+
+    var dictionary: [NSAttributedString.Key: Any] {
+        return [NSAttributedString.Key.backgroundColor: backgroundColor,
+                NSAttributedString.Key.foregroundColor: foregroundColor,
+                NSAttributedString.Key.font: font]
+    }
+}
+
 final class TokenTextView: UITextView {
 
     // MARK: Public properties
 
-    var tokenBackgroundColor = UIColor.purple
-    var tokenForegroundColor = UIColor.white
-    var tokenFont = UIFont.systemFont(ofSize: 12.0)
+    var tokenAttributes = Attributes(backgroundColor: .purple, foregroundColor: .white, font: .systemFont(ofSize: 12.0))
+    var textAttributes = Attributes(backgroundColor: .clear, foregroundColor: .black, font: .systemFont(ofSize: 12.0))
 
-    var defaultAttributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.backgroundColor: UIColor.clear,
-                                                            NSAttributedString.Key.foregroundColor: UIColor.black,
-                                                            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12.0)]
-    var tokenAttributes: [NSAttributedString.Key: Any] {
-        return [NSAttributedString.Key.backgroundColor: tokenBackgroundColor,
-                NSAttributedString.Key.foregroundColor: tokenForegroundColor,
-                NSAttributedString.Key.font: tokenFont]
-    }
-
-    var tokens = [Token]() {
+    var tokenList = [Token]() {
         didSet {
             tokenizeText()
         }
@@ -34,6 +36,7 @@ final class TokenTextView: UITextView {
     }
 
     // MARK: Private properties
+
     private var previousTextCount = 0
 
     private(set) var tokenOpen: String = "{{"
@@ -44,13 +47,13 @@ final class TokenTextView: UITextView {
 
     // MARK: Setup
 
-    init(text: String? = nil, tokens: [Token] = [], tokenOpen: String = "{{", tokenClose: String = "}}") {
+    init(text: String? = nil, tokenList: [Token] = [], tokenOpen: String = "{{", tokenClose: String = "}}") {
         super.init(frame: .zero, textContainer: nil)
         self.tokenOpen = tokenOpen
         self.tokenClose = tokenClose
         self.text = text
         defer {
-            self.tokens = tokens
+            self.tokenList = tokenList
         }
         setup()
     }
@@ -113,7 +116,7 @@ final class TokenTextView: UITextView {
         var templateInstances: [TokenInstance] = []
 
         // Gather each token instance and store in templateInstances, with range indices that include brackets (code representation)
-        for token in tokens {
+        for token in tokenList {
             let ranges = template.rangesOf(ofSubstring: tokenString(from: token.identifier))
             for range in ranges {
                 templateInstances.append(TokenInstance(token: token, range: NSRange(location: range.lowerBound, length: tokenString(from: token.identifier).count)))
@@ -219,11 +222,11 @@ final class TokenTextView: UITextView {
     private func styleText() {
         // Add common attributes
         let attributedString = NSMutableAttributedString(string: self.text)
-        attributedString.addAttributes(defaultAttributes, range: NSRange(location: 0, length: self.text.utf16.count))
+        attributedString.addAttributes(textAttributes.dictionary, range: NSRange(location: 0, length: self.text.utf16.count))
 
         // Add token attributes
         for instance in tokenInstances {
-            attributedString.addAttributes(tokenAttributes, range: instance.range)
+            attributedString.addAttributes(tokenAttributes.dictionary, range: instance.range)
         }
 
         self.attributedText = attributedString
