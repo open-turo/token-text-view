@@ -1,25 +1,13 @@
 import UIKit
 
-struct Attributes {
-    var backgroundColor: UIColor
-    var foregroundColor: UIColor
-    var font: UIFont
-
-    var dictionary: [NSAttributedString.Key: Any] {
-        return [NSAttributedString.Key.backgroundColor: backgroundColor,
-                NSAttributedString.Key.foregroundColor: foregroundColor,
-                NSAttributedString.Key.font: font]
-    }
-}
-
 final class TokenTextView: UITextView {
 
     // MARK: Public properties
 
-    var tokenAttributes = Attributes(backgroundColor: .purple, foregroundColor: .white, font: .systemFont(ofSize: 12.0))
-    var textAttributes = Attributes(backgroundColor: .clear, foregroundColor: .black, font: .systemFont(ofSize: 12.0))
+    var tokenAttributes: Attributes
+    var textAttributes: Attributes
 
-    var tokenList = [Token]() {
+    var tokenList: [Token] = [Token]() {
         didSet {
             tokenizeText()
         }
@@ -39,31 +27,46 @@ final class TokenTextView: UITextView {
 
     private var previousTextCount = 0
 
-    private(set) var tokenOpen: String = "{{"
-    private(set) var tokenClose: String = "}}"
+    private(set) var tokenOpen: String
+    private(set) var tokenClose: String
 
     private var tokenInstances = [TokenInstance]()
     private var pasteboardTokenInstances = [(TokenInstance, Int)]()
 
     // MARK: Setup
 
-    init(text: String? = nil, tokenList: [Token] = [], tokenOpen: String = "{{", tokenClose: String = "}}") {
-        super.init(frame: .zero, textContainer: nil)
+    init(text: String? = nil,
+         tokenList: [Token] = [],
+         tokenOpen: String = "{{",
+         tokenClose: String = "}}",
+         tokenAttributes: Attributes = Attributes(backgroundColor: .purple, foregroundColor: .white, font: .systemFont(ofSize: 12.0)),
+         textAttributes: Attributes = Attributes(backgroundColor: .clear, foregroundColor: .black, font: .systemFont(ofSize: 12.0))) {
         self.tokenOpen = tokenOpen
         self.tokenClose = tokenClose
-        self.text = text
+        self.tokenAttributes = tokenAttributes
+        self.textAttributes = textAttributes
         defer {
             self.tokenList = tokenList
         }
+        super.init(frame: .zero, textContainer: nil)
+        self.text = text
         setup()
     }
 
     override init(frame: CGRect, textContainer: NSTextContainer?) {
+        self.tokenOpen = "{{"
+        self.tokenClose = "}}"
+        self.tokenAttributes = Attributes(backgroundColor: .purple, foregroundColor: .white, font: .systemFont(ofSize: 12.0))
+        self.textAttributes = Attributes(backgroundColor: .clear, foregroundColor: .black, font: .systemFont(ofSize: 12.0))
         super.init(frame: frame, textContainer: textContainer)
         setup()
     }
 
     required init?(coder: NSCoder) {
+        self.tokenOpen = "{{"
+        self.tokenClose = "}}"
+        self.tokenAttributes = Attributes(backgroundColor: .purple, foregroundColor: .white, font: .systemFont(ofSize: 12.0))
+        self.textAttributes = Attributes(backgroundColor: .clear, foregroundColor: .black, font: .systemFont(ofSize: 12.0))
         super.init(coder: coder)
         setup()
     }
