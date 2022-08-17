@@ -13,11 +13,12 @@
 		B48BA0D328A58EA60077ACEA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48BA0D128A58EA60077ACEA /* Main.storyboard */; };
 		B48BA0D528A58EA70077ACEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B48BA0D428A58EA70077ACEA /* Assets.xcassets */; };
 		B48BA0D828A58EA70077ACEA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B48BA0D628A58EA70077ACEA /* LaunchScreen.storyboard */; };
-		B48BA0EC28A58F470077ACEA /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48BA0E928A58F470077ACEA /* String.swift */; };
 		B48BA0ED28A58F470077ACEA /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48BA0EA28A58F470077ACEA /* Token.swift */; };
 		B48BA0EE28A58F470077ACEA /* TokenTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48BA0EB28A58F470077ACEA /* TokenTextView.swift */; };
 		B48BA0F028A5927D0077ACEA /* MockDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48BA0EF28A5927D0077ACEA /* MockDataLoader.swift */; };
 		B48BA0F328A592D00077ACEA /* MockTokens.json in Resources */ = {isa = PBXBuildFile; fileRef = B48BA0F228A592D00077ACEA /* MockTokens.json */; };
+		B48BA0FB28AD82600077ACEA /* String+Additions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48BA0FA28AD82600077ACEA /* String+Additions.swift */; };
+		B48BA0FD28AD827D0077ACEA /* Attributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B48BA0FC28AD827D0077ACEA /* Attributes.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,11 +30,12 @@
 		B48BA0D428A58EA70077ACEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B48BA0D728A58EA70077ACEA /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B48BA0D928A58EA70077ACEA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B48BA0E928A58F470077ACEA /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = String.swift; path = ../../../../Sources/TokenTextView/String.swift; sourceTree = "<group>"; };
 		B48BA0EA28A58F470077ACEA /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Token.swift; path = ../../../../Sources/TokenTextView/Token.swift; sourceTree = "<group>"; };
 		B48BA0EB28A58F470077ACEA /* TokenTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TokenTextView.swift; path = ../../../../Sources/TokenTextView/TokenTextView.swift; sourceTree = "<group>"; };
 		B48BA0EF28A5927D0077ACEA /* MockDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockDataLoader.swift; sourceTree = "<group>"; };
 		B48BA0F228A592D00077ACEA /* MockTokens.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = MockTokens.json; path = ../../../../Tests/TokenTextViewTests/Mocks/MockTokens.json; sourceTree = "<group>"; };
+		B48BA0FA28AD82600077ACEA /* String+Additions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "String+Additions.swift"; path = "../../../../Sources/TokenTextView/String+Additions.swift"; sourceTree = "<group>"; };
+		B48BA0FC28AD827D0077ACEA /* Attributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Attributes.swift; path = ../../../../Sources/TokenTextView/Attributes.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,9 +84,10 @@
 		B48BA0E828A58F3A0077ACEA /* TokenTextView */ = {
 			isa = PBXGroup;
 			children = (
-				B48BA0E928A58F470077ACEA /* String.swift */,
 				B48BA0EA28A58F470077ACEA /* Token.swift */,
 				B48BA0EB28A58F470077ACEA /* TokenTextView.swift */,
+				B48BA0FA28AD82600077ACEA /* String+Additions.swift */,
+				B48BA0FC28AD827D0077ACEA /* Attributes.swift */,
 			);
 			path = TokenTextView;
 			sourceTree = "<group>";
@@ -170,11 +173,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B48BA0FB28AD82600077ACEA /* String+Additions.swift in Sources */,
 				B48BA0D028A58EA60077ACEA /* ViewController.swift in Sources */,
+				B48BA0FD28AD827D0077ACEA /* Attributes.swift in Sources */,
 				B48BA0ED28A58F470077ACEA /* Token.swift in Sources */,
 				B48BA0CC28A58EA60077ACEA /* AppDelegate.swift in Sources */,
 				B48BA0EE28A58F470077ACEA /* TokenTextView.swift in Sources */,
-				B48BA0EC28A58F470077ACEA /* String.swift in Sources */,
 				B48BA0F028A5927D0077ACEA /* MockDataLoader.swift in Sources */,
 				B48BA0CE28A58EA60077ACEA /* SceneDelegate.swift in Sources */,
 			);
