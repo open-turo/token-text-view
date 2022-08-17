@@ -8,13 +8,13 @@
 import UIKit
 
 class TokenTextViewExampleController: UIViewController {
-    @IBOutlet weak var tokenTextView: TokenTextView! {
+    @IBOutlet private var tokenTextView: TokenTextView! {
         didSet {
             tokenTextView.layer.borderColor = UIColor.black.cgColor
             tokenTextView.layer.borderWidth = 1.0
         }
     }
-    @IBOutlet weak var tokenListTableView: UITableView!
+    @IBOutlet private var tokenListTableView: UITableView!
 
     private let tokenList = MockDataLoader.loadMockTokenList() ?? []
 
