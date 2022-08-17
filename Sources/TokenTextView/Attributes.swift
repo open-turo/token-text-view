@@ -1,6 +1,6 @@
 import UIKit
 
-struct Attributes {
+struct TokenTextViewAttributes {
     var backgroundColor: UIColor
     var foregroundColor: UIColor
     var font: UIFont

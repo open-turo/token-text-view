@@ -4,8 +4,8 @@ final class TokenTextView: UITextView {
 
     // MARK: Public properties
 
-    var tokenAttributes: Attributes
-    var textAttributes: Attributes
+    var tokenAttributes: TokenTextViewAttributes
+    var textAttributes: TokenTextViewAttributes
 
     var tokenList: [Token] = [Token]() {
         didSet {
@@ -39,8 +39,8 @@ final class TokenTextView: UITextView {
          tokenList: [Token] = [],
          tokenOpen: String = "{{",
          tokenClose: String = "}}",
-         tokenAttributes: Attributes = Attributes(backgroundColor: .purple, foregroundColor: .white, font: .systemFont(ofSize: 12.0)),
-         textAttributes: Attributes = Attributes(backgroundColor: .clear, foregroundColor: .black, font: .systemFont(ofSize: 12.0))) {
+         tokenAttributes: TokenTextViewAttributes = TokenTextViewAttributes(backgroundColor: .purple, foregroundColor: .white, font: .systemFont(ofSize: 12.0)),
+         textAttributes: TokenTextViewAttributes = TokenTextViewAttributes(backgroundColor: .clear, foregroundColor: .black, font: .systemFont(ofSize: 12.0))) {
         self.tokenOpen = tokenOpen
         self.tokenClose = tokenClose
         self.tokenAttributes = tokenAttributes
@@ -53,20 +53,11 @@ final class TokenTextView: UITextView {
         setup()
     }
 
-    override init(frame: CGRect, textContainer: NSTextContainer?) {
-        self.tokenOpen = "{{"
-        self.tokenClose = "}}"
-        self.tokenAttributes = Attributes(backgroundColor: .purple, foregroundColor: .white, font: .systemFont(ofSize: 12.0))
-        self.textAttributes = Attributes(backgroundColor: .clear, foregroundColor: .black, font: .systemFont(ofSize: 12.0))
-        super.init(frame: frame, textContainer: textContainer)
-        setup()
-    }
-
     required init?(coder: NSCoder) {
         self.tokenOpen = "{{"
         self.tokenClose = "}}"
-        self.tokenAttributes = Attributes(backgroundColor: .purple, foregroundColor: .white, font: .systemFont(ofSize: 12.0))
-        self.textAttributes = Attributes(backgroundColor: .clear, foregroundColor: .black, font: .systemFont(ofSize: 12.0))
+        self.tokenAttributes = TokenTextViewAttributes(backgroundColor: .purple, foregroundColor: .white, font: .systemFont(ofSize: 12.0))
+        self.textAttributes = TokenTextViewAttributes(backgroundColor: .clear, foregroundColor: .black, font: .systemFont(ofSize: 12.0))
         super.init(coder: coder)
         setup()
     }
