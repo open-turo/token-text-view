@@ -23,6 +23,13 @@ class TokenTextViewExampleController: UIViewController {
         // Do any additional setup after loading the view.
         tokenTextView.tokenList = tokenList
     }
+
+    @IBAction func didTapGenerateTemplatedTextButton(_ sender: Any) {
+        let templatedText = tokenTextView.templatedText
+        let alertController = UIAlertController(title: nil, message: templatedText, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "Done", style: .cancel))
+        present(alertController, animated: true)
+    }
 }
 
 extension TokenTextViewExampleController: UITableViewDelegate, UITableViewDataSource {

@@ -40,16 +40,27 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Rh-C3-ywp">
+                                <rect key="frame" x="116.5" y="686" width="181" height="31"/>
+                                <color key="tintColor" systemColor="systemPurpleColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Generate templated text"/>
+                                <connections>
+                                    <action selector="didTapGenerateTemplatedTextButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="y4j-Wo-JkC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="8Ty-lF-1yh" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="4xG-0K-XAP"/>
+                            <constraint firstItem="8Rh-C3-ywp" firstAttribute="top" secondItem="Y0F-QH-oQC" secondAttribute="bottom" constant="98" id="5Gv-rS-Mwq"/>
                             <constraint firstItem="8Ty-lF-1yh" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="24" id="6r5-6i-QCI"/>
                             <constraint firstItem="Y0F-QH-oQC" firstAttribute="top" secondItem="ZXR-pQ-L8v" secondAttribute="bottom" constant="16" id="EEc-R0-O56"/>
+                            <constraint firstItem="8Rh-C3-ywp" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="FF6-ei-V9P"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8Rh-C3-ywp" secondAttribute="bottom" constant="145" id="JkP-AS-pmc"/>
                             <constraint firstItem="ZXR-pQ-L8v" firstAttribute="top" secondItem="8Ty-lF-1yh" secondAttribute="bottom" constant="8" id="KUR-FC-hr9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ZXR-pQ-L8v" secondAttribute="trailing" id="LEq-kl-7w9"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Y0F-QH-oQC" secondAttribute="bottom" constant="274" id="TPY-al-R6B"/>
                             <constraint firstItem="ZXR-pQ-L8v" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="V0W-iN-7EN"/>
                             <constraint firstItem="Y0F-QH-oQC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="24" id="W04-Fj-zj9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8Ty-lF-1yh" secondAttribute="trailing" constant="24" id="aub-Rw-1hD"/>
@@ -72,6 +83,9 @@
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemPurpleColor">
+            <color red="0.68627450980392157" green="0.32156862745098042" blue="0.87058823529411766" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
