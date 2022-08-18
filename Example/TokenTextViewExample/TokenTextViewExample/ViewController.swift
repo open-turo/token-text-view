@@ -44,6 +44,7 @@ extension TokenTextViewExampleController: UITableViewDelegate, UITableViewDataSo
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         let token = tokenList[indexPath.row]
         tokenTextView.insertToken(token)
     }
