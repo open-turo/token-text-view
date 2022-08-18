@@ -122,6 +122,20 @@ let token = Token(name: "Token name", identifier: "TOKEN_IDENTIFIER")
 tokenTextView.insert(token)
 ```
 
+### Styling tokens & text
+
+You can set the `backgroundColor`, `foregroundColor` and `font` of both the text and tokens via the `tokenAttributes` and `textAttributes` properties.
+
+For example:
+
+```
+tokenTextView.tokenAttributes.backgroundColor = .gray
+tokenTextView.tokenAttributes.foregroundColor = .purple
+tokenTextView.tokenAttributes.font = UIFont.boldSystemFont(ofSize: 12.0)
+```
+
+You also set a `kern` value and additional `NSMutableParagraphStyle` values via the `kern` and `paragraphStyle` properties.
+
 ### Create templated text
 
 TokenTextView has a computed property called `templatedText` that converts rendered text into text templates with tokens in identifiers:
