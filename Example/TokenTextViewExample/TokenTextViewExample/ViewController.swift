@@ -12,6 +12,13 @@ class TokenTextViewExampleController: UIViewController {
         didSet {
             tokenTextView.layer.borderColor = UIColor.black.cgColor
             tokenTextView.layer.borderWidth = 1.0
+
+            let toolbar: UIToolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 30))
+            let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+            let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(didTapDone))
+            toolbar.setItems([flexSpace, doneButton], animated: false)
+            toolbar.sizeToFit()
+            tokenTextView.inputAccessoryView = toolbar
         }
     }
     @IBOutlet private var tokenListTableView: UITableView!
@@ -29,6 +36,10 @@ class TokenTextViewExampleController: UIViewController {
         let alertController = UIAlertController(title: nil, message: templatedText, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "Done", style: .cancel))
         present(alertController, animated: true)
+    }
+
+    @objc func didTapDone() {
+        tokenTextView.resignFirstResponder()
     }
 }
 
