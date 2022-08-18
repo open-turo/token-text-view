@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name             = 'TokenTextView'
-    s.version          = ENV['TAG_VERSION'] || '1.0.0' # falls back to 1.0.0
+    s.version          = ENV['VERSION'] || '1.0.0' # falls back to 1.0.0
     s.summary          = "A UITextView class for editing & managing tokenized text."
     s.homepage         = 'https://github.com/open-turo/token-text-view'
     s.license          = { :type => 'MIT', :file => 'LICENSE.md' }
