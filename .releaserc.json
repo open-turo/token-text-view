@@ -5,6 +5,11 @@
     "@semantic-release/commit-analyzer",
     "@semantic-release/release-notes-generator",
     "@semantic-release/github",
-    "semantic-release-cocoapods"
+    [
+      "semantic-release-cocoapods",
+      {
+        "podLint": false
+      }
+    ]
   ]
 }
