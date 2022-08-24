@@ -8,7 +8,7 @@
     [
       "semantic-release-cocoapods",
       {
-        "podLintArgs": "TokenTextView.podspec",
+        "podLintArgs": "--allow-warnings TokenTextView.podspec",
         "podPushArgs": "TokenTextView.podspec"
       }
     ]
