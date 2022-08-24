@@ -289,7 +289,7 @@ final class TokenTextView: UITextView {
             guard let self = self else { return false }
             return self.selectedRange.lowerBound <= $0.range.lowerBound && $0.range.upperBound <= self.selectedRange.upperBound
         }
-        guard let copiedTokenInstances = tokenInstances.filter(filterCondition).map({ $0.copy() as? TokenInstance }) as? [TokenInstance] else {
+        guard let copiedTokenInstances = tokenInstances.filter(filterCondition).map({ $0.copy() }) as? [TokenInstance] else {
             print("Could not get filtered token instances as [TokenInstance]")
             return
         }
