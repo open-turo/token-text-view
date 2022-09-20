@@ -244,17 +244,17 @@ public class TokenTextView: UITextView {
 
     // MARK: Pasteboard operations
 
-    override func cut(_ sender: Any?) {
+    public override func cut(_ sender: Any?) {
         copyTokens()
         super.cut(sender)
     }
 
-    override func copy(_ sender: Any?) {
+    public override func copy(_ sender: Any?) {
         copyTokens()
         super.copy(sender)
     }
 
-    override func paste(_ sender: Any?) {
+    public override func paste(_ sender: Any?) {
         // Check that the currently copied tokens are relevant to this paste operation
         guard pasteboardTokenInstances.filter({ UIPasteboard.general.string?.contains($0.0.token.name) ?? false }).count == pasteboardTokenInstances.count else {
             pasteboardTokenInstances.removeAll()
