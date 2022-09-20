@@ -1,15 +1,15 @@
 import Foundation
 
-public struct Token: Codable {
+public struct TemplateToken: Codable {
     public let name: String
     public let identifier: String
 }
 
 class TokenInstance: NSCopying, Codable {
-    let token: Token
+    let token: TemplateToken
     var range: NSRange
 
-    init(token: Token, range: NSRange) {
+    init(token: TemplateToken, range: NSRange) {
         self.token = token
         self.range = range
     }

@@ -7,7 +7,7 @@ public class TokenTextView: UITextView {
     public var tokenAttributes: TokenTextViewAttributes
     public var textAttributes: TokenTextViewAttributes
 
-    public var tokenList: [Token] = [Token]() {
+    public var tokenList: [TemplateToken] = [TemplateToken]() {
         didSet {
             tokenizeText()
         }
@@ -36,7 +36,7 @@ public class TokenTextView: UITextView {
     // MARK: Setup
 
     public init(text: String? = nil,
-         tokenList: [Token] = [],
+         tokenList: [TemplateToken] = [],
          tokenOpen: String = "{{",
          tokenClose: String = "}}",
          tokenAttributes: TokenTextViewAttributes = TokenTextViewAttributes(backgroundColor: .purple, foregroundColor: .white, font: .systemFont(ofSize: 12.0)),
@@ -69,7 +69,7 @@ public class TokenTextView: UITextView {
 
     // MARK: Public methods
 
-    public func insertToken(_ token: Token, at insertRange: NSRange? = nil) {
+    public func insertToken(_ token: TemplateToken, at insertRange: NSRange? = nil) {
         let location = insertRange != nil ? (insertRange?.location)! : selectedRange.location
         let tokenRange = NSRange(location: location, length: token.name.count)
 
