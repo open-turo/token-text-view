@@ -1,13 +1,13 @@
 import UIKit
 
-struct TokenTextViewAttributes {
-    var backgroundColor: UIColor
-    var foregroundColor: UIColor
-    var font: UIFont
-    var kern: Int?
-    var paragraphStyle: NSMutableParagraphStyle?
+public struct TokenTextViewAttributes {
+    public var backgroundColor: UIColor
+    public var foregroundColor: UIColor
+    public var font: UIFont
+    public var kern: Int?
+    public var paragraphStyle: NSMutableParagraphStyle?
 
-    var dictionary: [NSAttributedString.Key: Any] {
+    public var dictionary: [NSAttributedString.Key: Any] {
         var dictionary = [NSAttributedString.Key.backgroundColor: backgroundColor,
                           NSAttributedString.Key.foregroundColor: foregroundColor,
                           NSAttributedString.Key.font: font,
@@ -18,5 +18,13 @@ struct TokenTextViewAttributes {
         }
 
         return dictionary
+    }
+
+    public init(backgroundColor: UIColor, foregroundColor: UIColor, font: UIFont, kern: Int? = nil, paragraphStyle: NSMutableParagraphStyle? = nil) {
+        self.backgroundColor = backgroundColor
+        self.foregroundColor = foregroundColor
+        self.font = font
+        self.kern = kern
+        self.paragraphStyle = paragraphStyle
     }
 }
