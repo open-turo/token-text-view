@@ -1,19 +1,19 @@
 import UIKit
 
-final class TokenTextView: UITextView {
+public class TokenTextView: UITextView {
 
     // MARK: Public properties
 
-    var tokenAttributes: TokenTextViewAttributes
-    var textAttributes: TokenTextViewAttributes
+    public var tokenAttributes: TokenTextViewAttributes
+    public var textAttributes: TokenTextViewAttributes
 
-    var tokenList: [Token] = [Token]() {
+    public var tokenList: [Token] = [Token]() {
         didSet {
             tokenizeText()
         }
     }
 
-    var templatedText: String {
+    public var templatedText: String {
         // Ensure all tokens ranges have been updated
         guard tokenInstances.first(where: {$0.range.upperBound - 1 >= text.count}) == nil else {
             print("TokenTextView: Failed to create templated text.")
@@ -35,7 +35,7 @@ final class TokenTextView: UITextView {
 
     // MARK: Setup
 
-    init(text: String? = nil,
+    public init(text: String? = nil,
          tokenList: [Token] = [],
          tokenOpen: String = "{{",
          tokenClose: String = "}}",
@@ -69,7 +69,7 @@ final class TokenTextView: UITextView {
 
     // MARK: Public methods
 
-    func insertToken(_ token: Token, at insertRange: NSRange? = nil) {
+    public func insertToken(_ token: Token, at insertRange: NSRange? = nil) {
         let location = insertRange != nil ? (insertRange?.location)! : selectedRange.location
         let tokenRange = NSRange(location: location, length: token.name.count)
 

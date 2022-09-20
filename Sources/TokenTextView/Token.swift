@@ -1,8 +1,8 @@
 import Foundation
 
-struct Token: Codable {
-    let name: String
-    let identifier: String
+public struct Token: Codable {
+    public let name: String
+    public let identifier: String
 }
 
 class TokenInstance: NSCopying, Codable {
