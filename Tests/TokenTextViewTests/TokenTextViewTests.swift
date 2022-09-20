@@ -19,7 +19,7 @@ final class TokenTextViewTests: XCTestCase {
 
     var mockPlainText: String!
     var mockTemplateText: String!
-    var mockTokens: [Token]!
+    var mockTokens: [TemplateToken]!
     var mockTokenInstances: [TokenInstance]!
     var tokenTextView: TokenTextView!
     var tokenTextViewMirror: TokenTextViewMirror!
@@ -245,7 +245,7 @@ extension TokenTextViewTests {
         if let path = Bundle.module.path(forResource: "MockTokens", ofType: "json") {
             do {
                 let jsonData = try Data(contentsOf: URL(fileURLWithPath: path))
-                let jsonResult = try JSONDecoder().decode([Token].self, from: jsonData)
+                let jsonResult = try JSONDecoder().decode([TemplateToken].self, from: jsonData)
                 self.mockTokens = jsonResult
             } catch {
                 print("Could not decode Tokens.json")
@@ -270,7 +270,7 @@ extension TokenTextViewTests {
                     guard let length = object["range"]?["length"] as? Int else {
                         continue
                     }
-                    mockTokenInstances.append(TokenInstance(token: Token(name: name, identifier: identifier), range: NSRange(location: location, length: length)))
+                    mockTokenInstances.append(TokenInstance(token: TemplateToken(name: name, identifier: identifier), range: NSRange(location: location, length: length)))
                 }
                 self.mockTokenInstances = mockTokenInstances
             } catch {
