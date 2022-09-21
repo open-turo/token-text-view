@@ -31,7 +31,19 @@ and vice-versa.
 
 ## Installation
 
-TokenUI can be installed via [CocoaPods](https://cocoapods.org)
+TokenTextView can be installed via [CocoaPods](https://cocoapods.org)
+
+### Swift Package Manager
+
+TokenTextView can be installed via [SPM](https://www.swift.org/package-manager/). Once your Swift package is set up, simply add TokenTextView to `dependencies` in `Package.swift`:
+
+```
+dependencies: [
+  .package(url: "https://github.com/open-turo/token-text-view.git", upToNextMajor:(from:"1.0.0"))
+]
+```
+
+You can also use Xcode to install TokenTextView via SPM. Go to `File` -> `Swift Packages` -> `Add Package Dependency`. Enter the url (`https://github.com/open-turo/token-text-view.git`), select `Version` -> `Up to next major` and enter `1.0.0` under the `Rules` section. Click `Next` and your package will be installed!
 
 ### CocoaPods
 
