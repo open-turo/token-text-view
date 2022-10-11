@@ -1,8 +1,13 @@
 import Foundation
 
 public struct TemplateToken: Codable {
-    public let name: String
-    public let identifier: String
+    public let name: String { get }
+    public let identifier: String { get }
+
+    public init(name: String, identifier: String) {
+        self.name = name
+        self.identifier = identifier
+    }
 }
 
 class TokenInstance: NSCopying, Codable {
