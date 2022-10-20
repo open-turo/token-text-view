@@ -1,8 +1,8 @@
 import Foundation
 
 public struct TemplateToken: Codable {
-    public let name: String { get }
-    public let identifier: String { get }
+    public var name: String
+    public var identifier: String
 
     public init(name: String, identifier: String) {
         self.name = name
