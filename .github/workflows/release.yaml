@@ -19,7 +19,7 @@ jobs:
           version: "*"
       - name: Run swiftlint
         run: swiftlint
-      - uses: open-turo/action-pre-commit@v1
+      - uses: open-turo/action-pre-commit@v2
 
   test:
     name: Test
