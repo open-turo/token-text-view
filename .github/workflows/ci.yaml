@@ -32,6 +32,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build package
-        run: swift build -Xswiftc "-sdk" -Xswiftc "$(xcrun --sdk iphonesimulator --show-sdk-path)" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios6.2-simulator"
+        run: swift build -Xswiftc "-sdk" -Xswiftc "$(xcrun --sdk iphonesimulator --show-sdk-path)" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios16.2-simulator"
       - name: Run tests
         run: xcodebuild test -scheme TokenTextView -sdk "$(xcrun --sdk iphonesimulator --show-sdk-path)" -target x86_64-apple-ios16.2-simulator -destination "OS=16.2,name=iPhone 13 Pro"
