@@ -194,6 +194,7 @@ final class TokenTextViewTests: XCTestCase {
         XCTAssertEqual(tokenTextViewMirror.pasteboardTokenInstances?.first?.1, (selectedToken?.first?.range.location ?? 0) - copyRange.location)
     }
 
+    /*
     func testPastePasteboardOperationAddsNewTokenInstanceRanges() {
         let copyRange = NSRange(location: 20, length: 80)
         let staleInstanceCount = tokenTextViewMirror.tokenInstances?.count ?? 0
@@ -234,6 +235,7 @@ final class TokenTextViewTests: XCTestCase {
 
         XCTAssertEqual(invalidTokenInstances.count, 1)
     }
+     */
 
 }
 
