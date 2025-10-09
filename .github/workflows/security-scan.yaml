@@ -1,0 +1,20 @@
+name: Security scan
+
+on:
+  pull_request_target: {}
+  workflow_dispatch: {}
+  push:
+    branches: [main]
+
+permissions:
+  pull-requests: write
+  contents: read
+  security-events: write
+
+jobs:
+  static-analysis:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: open-turo/actions-security/static-analysis@v4
+        with:
+          semgrep-app-token: ${{ secrets.SEMGREP_APP_TOKEN }}
